@@ -1,0 +1,13 @@
+db-volumes
+stock_control_service/var
+stock_control_service/.env
+stock_control_service/node_modules
+stock_control_service/coverage
+action_history_service/var
+action_history_service/.env
+action_history_service/node_modules
+user_service/var
+user_service/.env
+user_service/node_modules
+user_service/dist
+var

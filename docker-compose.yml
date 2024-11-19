@@ -1,0 +1,100 @@
+version: "3.9"
+services:
+  rabbitmq:
+    image: "rabbitmq:management"
+    container_name: rabbitmq
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - ./var/lib/rabbitmq:/var/lib/rabbitmq
+  ## DataBases ##
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=example
+      - POSTGRES_DB=stock
+    ports:
+      - "5425:5432"
+    volumes:
+      - ./db-volumes/database/postgres:/var/lib/postgresql/data
+  ## Services ##
+  stock_control_service:
+    container_name: stock_control_service
+    restart: always
+    build:
+      context: ./stock_control_service
+      dockerfile: Dockerfile
+    expose:
+      - "5004"
+    ports:
+      - "127.0.0.1:5004:5004"
+    volumes:
+      - ./stock_control_service:/app
+      - /app/node_modules
+      - ./var/log:/var/stock/log
+    environment:
+      - PORT=5004
+      - DATABASE_URL=postgresql://root:example@postgres:5432/stock_control?schema=public
+      - NODE_ENV=development
+      - LOG_LEVEL=debug
+      - RABBITMQ_URL=amqp://user:password@rabbitmq:5672
+    depends_on:
+      - postgres
+      - rabbitmq
+
+  action_history_service:
+    container_name: action_history_service
+    restart: always
+    build:
+      context: ./action_history_service
+      dockerfile: Dockerfile
+    expose:
+      - "5005"
+    ports:
+      - "127.0.0.1:5005:5005"
+    volumes:
+      - ./action_history_service:/app
+      - /app/node_modules
+      - ./var/log:/var/action/log
+    environment:
+      - PORT=5005
+      - DATABASE_URL=postgresql://root:example@postgres:5432/action_history?schema=public
+      - NODE_ENV=development
+      - LOG_LEVEL=debug
+      - RABBITMQ_URL=amqp://user:password@rabbitmq:5672
+    depends_on:
+      - postgres
+      - rabbitmq
+
+  user_service:
+    container_name: user_service
+    restart: always
+    build:
+      context: ./user_service
+      dockerfile: Dockerfile
+    expose:
+      - "5003"
+    ports:
+      - "127.0.0.1:5003:5003"
+    volumes:
+      - ./user_service:/app
+      - /app/node_modules
+      - ./var/log:/var/user/log
+    environment:
+      - PORT=5003
+      - DATABASE_URL=postgresql://root:example@postgres:5432/user?schema=public
+      - NODE_ENV=development
+      - LOG_LEVEL=debug
+    depends_on:
+      - postgres
+networks:
+  network:
+    driver: bridge

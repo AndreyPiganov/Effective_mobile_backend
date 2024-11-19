@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ActionHistory {
+  id        Int       @id @default(autoincrement())
+  action    ActionType
+  shopId    Int?      // Необязательный так как для действий с продуктами нельзя назначать shopId
+  plu       String    @db.VarChar()
+  timestamp DateTime  @default(now())
+  metadata  Json?      @db.Json // Нужны для анализа(доп инфа, если нужна)
+}
+
+enum ActionType {
+  CREATE_STOCK
+  UPDATE_STOCK
+  DELETE_STOCK
+  INCREASE_STOCK
+  DECREASE_STOCK
+  CREATE_PRODUCT
+  UPDATE_PRODUCT
+  DELETE_PRODUCT
+}
