@@ -7,6 +7,7 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerOptions from './docs/swagger.js';
 import swaggerJSDoc from 'swagger-jsdoc';
 import { rabbitMQConsumer } from './services/rabbitMQ.consumer.js';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -26,8 +27,7 @@ rabbitMQConsumer
 app.use(express.json());
 app.use(
     cors({
-        origin: '*',
-        methods: ['GET', 'POST', 'PUT', 'DELETE']
+        origin: '*'
     })
 );
 app.use(express.urlencoded({ extended: true }));
