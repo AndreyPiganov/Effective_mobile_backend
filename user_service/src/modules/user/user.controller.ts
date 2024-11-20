@@ -42,7 +42,10 @@ export class UserController {
         required: false
     })
     @ApiResponse({ status: 500, description: 'Ошибка при получении пользователей' })
-    getAllUsers(@Query('page', ParseIntPipe) page: number, @Query('itemsPerPage') itemsPerPage: number) {
+    getAllUsers(
+        @Query('page', new ParseIntPipe({ optional: true })) page: number,
+        @Query('itemsPerPage', new ParseIntPipe({ optional: true })) itemsPerPage: number
+    ) {
         try {
             return this.userService.getAllUsers(page, itemsPerPage);
         } catch (e) {
