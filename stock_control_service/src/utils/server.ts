@@ -13,7 +13,8 @@ function createServer() {
     app.use(express.json());
     app.use(
         cors({
-            origin: '*'
+            origin: false,
+            credentials: true
         })
     );
     app.use(express.urlencoded({ extended: true }));
