@@ -33,8 +33,6 @@ router.get('/', shopController.getAllShops);
  *     responses:
  *       200:
  *         $ref: '#/components/responses/ShopFound'
- *       400:
- *         $ref: '#/components/responses/BadRequest'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  *       500:
@@ -58,8 +56,6 @@ router.get('/:id', [validateIdParam], shopController.getShopById);
  *     responses:
  *       201:
  *         $ref: '#/components/responses/ShopCreated'
- *       400:
- *         $ref: '#/components/responses/BadRequest'
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
@@ -83,8 +79,6 @@ router.post('/', [...createShopValidator], shopController.createShop);
  *     responses:
  *       200:
  *         $ref: '#/components/responses/ShopUpdated'
- *       400:
- *         $ref: '#/components/responses/BadRequest'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  *       500:
@@ -104,8 +98,6 @@ router.put('/:id', [...updateShopValidator, validateIdParam], shopController.upd
  *     responses:
  *       200:
  *         $ref: '#/components/responses/ShopDeleted'
- *       400:
- *         $ref: '#/components/responses/BadRequest'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  *       500:

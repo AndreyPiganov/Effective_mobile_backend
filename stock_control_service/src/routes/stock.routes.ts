@@ -23,8 +23,6 @@ const router = Router();
  *     responses:
  *       200:
  *         $ref: '#/components/responses/StockList'
- *       400:
- *         $ref: '#/components/responses/BadRequest'
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
@@ -42,8 +40,6 @@ router.get('/', [...validateStockFilters], stockController.getStocks);
  *     responses:
  *       200:
  *         $ref: '#/components/responses/StockFound'
- *       400:
- *         $ref: '#/components/responses/BadRequest'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  *       500:
@@ -67,8 +63,6 @@ router.get('/:id', [validateIdParam], stockController.getStockById);
  *     responses:
  *       201:
  *         $ref: '#/components/responses/StockCreated'
- *       400:
- *         $ref: '#/components/responses/BadRequest'
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
@@ -90,8 +84,6 @@ router.post('/', [...createStockValidator], stockController.createStock);
  *     responses:
  *       200:
  *         $ref: '#/components/responses/StockUpdated'
- *       400:
- *         $ref: '#/components/responses/BadRequest'
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
@@ -113,8 +105,6 @@ router.put('/increase', [...adjustStockValidator], stockController.increaseStock
  *     responses:
  *       200:
  *         $ref: '#/components/responses/StockUpdated'
- *       400:
- *         $ref: '#/components/responses/BadRequest'
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
@@ -138,8 +128,6 @@ router.put('/decrease', [...adjustStockValidator], stockController.decreaseStock
  *     responses:
  *       200:
  *         $ref: '#/components/responses/StockUpdated'
- *       400:
- *         $ref: '#/components/responses/BadRequest'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  *       500:
@@ -159,8 +147,6 @@ router.put('/:id', [...updateStockValidator, validateIdParam], stockController.u
  *     responses:
  *       200:
  *         $ref: '#/components/responses/StockDeleted'
- *       400:
- *         $ref: '#/components/responses/BadRequest'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  *       500:

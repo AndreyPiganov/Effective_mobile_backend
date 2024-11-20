@@ -20,8 +20,6 @@ const router = Router();
  *     responses:
  *       200:
  *         $ref: '#/components/responses/ProductList'
- *       400:
- *         $ref: '#/components/responses/BadRequest'
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
@@ -39,8 +37,6 @@ router.get('/', [...validateProductFilters], productController.getProducts);
  *     responses:
  *       200:
  *         $ref: '#/components/responses/ProductFound'
- *       400:
- *         $ref: '#/components/responses/BadRequest'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  *       500:
@@ -64,8 +60,6 @@ router.get('/:id', [validateIdParam], productController.getProductById);
  *     responses:
  *       201:
  *         $ref: '#/components/responses/ProductCreated'
- *       400:
- *         $ref: '#/components/responses/BadRequest'
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
@@ -89,8 +83,6 @@ router.post('/', [...createProductValidator], productController.createProduct);
  *     responses:
  *       200:
  *         $ref: '#/components/responses/ProductUpdated'
- *       400:
- *         $ref: '#/components/responses/BadRequest'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  *       500:
@@ -110,8 +102,6 @@ router.put('/:id', [...updateProductValidator, validateIdParam], productControll
  *     responses:
  *       200:
  *         $ref: '#/components/responses/ProductDeleted'
- *       400:
- *         $ref: '#/components/responses/BadRequest'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  *       500:
