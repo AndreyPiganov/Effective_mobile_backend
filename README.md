@@ -47,9 +47,9 @@ POST /products — Создание товара
 
 POST /stocks — Создание остатка
 
-PATCH /stocks/increase — Увеличение остатка
+PUT /stocks/increase — Увеличение остатка
 
-PATCH /stocks/decrease — Уменьшение остатка
+PUT /stocks/decrease — Уменьшение остатка
 
 GET /stocks — Получение остатков по фильтрам (параметры: plu, shop_id, quantity_on_shelf, quantity_in_order)
 
@@ -73,7 +73,7 @@ Swagger документация: http://localhost:5005/api-docs
 
 ## 3. Сервис управления пользователями
 
-Базовый URL: http://localhost:5003/api/v1
+Базовый URL: http://localhost:5003
 
 ### Эндпоинты
 
@@ -91,7 +91,7 @@ Swagger документация: http://localhost:5003/api-docs
 ## Сервис истории действий с товарами (порт 5005)
 
 Реализован на JavaScript.
-Получает события от сервиса товаров (через HTTP или другой метод).
+Получает события от сервиса товаров (через RabbitMQ).
 Хранит записи в PostgreSQL и поддерживает фильтрацию и пагинацию.
 
 ## Сервис управления пользователями (порт 5003)
