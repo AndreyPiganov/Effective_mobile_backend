@@ -47,9 +47,9 @@ POST /products — Создание товара
 
 POST /stocks — Создание остатка
 
-PATCH /stocks/increase — Увеличение остатка
+PUT /stocks/increase — Увеличение остатка
 
-PATCH /stocks/decrease — Уменьшение остатка
+PUT /stocks/decrease — Уменьшение остатка
 
 GET /stocks — Получение остатков по фильтрам (параметры: plu, shop_id, quantity_on_shelf, quantity_in_order)
 
