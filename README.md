@@ -73,7 +73,7 @@ Swagger документация: http://localhost:5005/api-docs
 
 ## 3. Сервис управления пользователями
 
-Базовый URL: http://localhost:5003/api/v1
+Базовый URL: http://localhost:5003
 
 ### Эндпоинты
 
