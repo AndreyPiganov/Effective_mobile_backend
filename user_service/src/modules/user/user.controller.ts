@@ -20,6 +20,7 @@ import { LoggingInterceptor } from 'src/common/interceptors/LogginInterceptor';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery } from '@nestjs/swagger';
 import { UserCreateDto } from './dto/user.create.dto';
 import { UserUpdateDto } from './dto/user.update.dto';
+import { QueryUser } from './dto/query.user';
 
 @ApiTags('Users')
 @Controller('/users')
@@ -42,12 +43,9 @@ export class UserController {
         required: false
     })
     @ApiResponse({ status: 500, description: 'Ошибка при получении пользователей' })
-    getAllUsers(
-        @Query('page', new ParseIntPipe({ optional: true })) page: number,
-        @Query('itemsPerPage', new ParseIntPipe({ optional: true })) itemsPerPage: number
-    ) {
+    getAllUsers(@Query() query: QueryUser) {
         try {
-            return this.userService.getAllUsers(page, itemsPerPage);
+            return this.userService.getAllUsers(query.page, query.itemsPerPage);
         } catch (e) {
             this.logger.error('Error in userController:', e);
             throw new HttpException('Ошибка при получении пользователей', HttpStatus.INTERNAL_SERVER_ERROR);
