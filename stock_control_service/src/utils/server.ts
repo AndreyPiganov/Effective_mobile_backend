@@ -4,14 +4,12 @@ import mainRouter from '../routes';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerOptions from '../docs/swagger';
 import swaggerUi from 'swagger-ui-express';
-import cors from 'cors';
 
 function createServer() {
     const app = express();
     const swaggerSpec = swaggerJSDoc(swaggerOptions);
 
     app.use(express.json());
-    app.use(cors());
     app.use(express.urlencoded({ extended: true }));
 
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
